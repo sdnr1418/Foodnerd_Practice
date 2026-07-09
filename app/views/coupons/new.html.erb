@@ -1,0 +1,41 @@
+<div class="coupon-container">
+  <h2>Create New Discount Coupon</h2>
+
+  <%= form_with(model: @coupon, local: true, class: "coupon-form") do |form| %>
+
+    <%# Display model validation errors at the top if they exist %>
+    <% if @coupon.errors.any? %>
+      <div id="error_explanation" class="error-messages">
+        <h3><%= pluralize(@coupon.errors.count, "error") %> prohibited this coupon from being saved:</h3>
+        <ul>
+          <% @coupon.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%# Coupon Code Text Field %>
+    <div class="form-group">
+      <%= form.label :code, "Coupon Code" %>
+      <%= form.text_field :code, placeholder: "e.g., FOODNERD50" %>
+    </div>
+
+    <%# Discount Percentage Number Field %>
+    <div class="form-group">
+      <%= form.label :discount_percentage, "Discount Percentage (%)" %>
+      <%= form.number_field :discount_percentage, min: 1, max: 100, step: 1, placeholder: "e.g., 15" %>
+    </div>
+
+    <%# Expiry Date Selection drop-downs %>
+    <div class="form-group">
+      <%= form.label :expiry_date, "Expiration Date" %>
+      <%= form.date_select :expiry_date, default: Date.today, start_year: Date.today.year %>
+    </div>
+
+    <div class="form-actions">
+      <%= form.submit "Save Coupon", class: "btn-submit" %>
+    </div>
+
+  <% end %>
+</div>

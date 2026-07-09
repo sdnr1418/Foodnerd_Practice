@@ -19,4 +19,5 @@ Rails.application.routes.draw do
       resources :customers, only:[:create, :update]
     end
   end
+  resources :coupons, only: [:new, :create]
 end

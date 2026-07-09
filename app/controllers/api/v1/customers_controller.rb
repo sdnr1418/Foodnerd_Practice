@@ -2,6 +2,7 @@ class Api::V1::CustomersController < ApplicationController
   # Skip CSRF verification since we are testing via API/curl clients
   skip_before_action :verify_authenticity_token
   before_action :set_customer, only: [:update]
+  before_action :authorize_manager!, only: [:update]
 
   # POST /api/v1/customers
   def create
